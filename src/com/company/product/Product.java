@@ -47,10 +47,10 @@ public class Product {
     }
 
     public String toString(){
-        String str = "Title: " + title + "\n";
-        str += "Description: " + description + "\n";
-        str += "Price: " + price + "\n";
-        str += "----------------------";
-        return str;
+        String txt = id + " | ";
+        txt += title + " | ";
+        txt += price + " | ";
+        txt += description;
+        return txt;
     }
 }

@@ -1,7 +1,12 @@
 package com.company.user;
 
-public class User {
+import java.util.Scanner;
+import com.company.product.*;
+
+public class User implements Auth{
     private static int sequence;
+    protected Scanner scanner;
+    protected ProductService productService;
 
     static {
         sequence = 0;
@@ -12,13 +17,17 @@ public class User {
     private String lastName;
     private final String userName;
     private String password;
+    private int money;
 
     public User(String firstName, String lastName, String userName, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
+        this.money = 100000;
         this.id = ++sequence;
+        productService = new ProductService();
+        scanner = new Scanner(System.in);
     }
 
     public int getId() {
@@ -53,7 +62,27 @@ public class User {
 
     }
 
+    public void makeShopping(){
+        System.out.println(this);
+        for(Product item : productService.getProducts()){
+            System.out.println(item);
+        }
+        System.out.println("Enter number of product to buy");
+        int productId = scanner.nextInt();
+        Product product = productService.findProductById(productId);
+        if(product != null){
+            money -= product.getPrice();
+        }
+        else{
+            System.out.println("Product is not found. Try again.");
+            makeShopping();
+        }
+    }
+
     public String toString() {
-        return firstName + " " + lastName;
+        String txt = firstName + " " + lastName + " | ";
+        txt += userName + " | ";
+        txt += "Money: " + money;
+        return txt;
     }
 }

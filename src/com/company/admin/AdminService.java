@@ -15,17 +15,17 @@ public class AdminService extends UserServiceAbstract{
     }
 
     static {
-        adminList[0] = new Admin("Jhon", "Smith", "jh@gmail.com", "jhon123");
+        adminList[0] = new Admin("Samvel", "Papyan", "AdminSam", "123456");
     }
     public User registration(){
 
-        System.out.println("please enter first name");
+        System.out.print("First Name: ");
         String firstName = scanner.nextLine();
-        System.out.println("please enter lasr name");
+        System.out.print("Last Name: ");
         String lastName = scanner.nextLine();
-        System.out.println("please enter userName ");
+        System.out.print("Username: ");
         String userName = scanner.nextLine();
-        System.out.println("please enter paswword ");
+        System.out.print("Password: ");
         String password = scanner.nextLine();
 
         return registration(firstName,lastName,userName,password);
@@ -47,18 +47,18 @@ public class AdminService extends UserServiceAbstract{
     public User login(String userName, String password){
         for(Admin admin : adminList) {
             if(admin.getPassword().equals(password) && admin.getUserName().equals(userName)){
-                System.out.println(admin.toString() + " successfully loge in");
+                System.out.println("Welcome Admin " + admin.getUserName());
                 return admin;
             }
         }
-        System.out.println("error wrong username or password");
+        System.out.println("Invalid username or password");
         return null;
     }
 
     public User login(){
-        System.out.println("please enter userName ");
+        System.out.print("Username: ");
         String userName = scanner.nextLine();
-        System.out.println("please enter paswword ");
+        System.out.print("Password: ");
         String password = scanner.nextLine();
         return login(userName, password);
     }
